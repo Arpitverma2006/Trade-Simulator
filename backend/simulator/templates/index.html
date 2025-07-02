@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trade Simulator</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            display: flex;
+            height: 100vh;
+        }
+        .left-panel, .right-panel {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .left-panel {
+            background-color: #1e1e2f;
+            color: white;
+        }
+        .right-panel {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h2 {
+            margin-top: 0;
+        }
+        .value-block {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="left-panel">
+        <h2>Input Parameters</h2>
+        <div class="value-block"><strong>Exchange:</strong> OKX</div>
+        <div class="value-block"><strong>Asset:</strong> BTC-USDT-SWAP</div>
+        <div class="value-block"><strong>Order Type:</strong> Market</div>
+        <div class="value-block"><strong>Quantity:</strong> $100</div>
+        <div class="value-block"><strong>Volatility:</strong> 0.5</div>
+        <div class="value-block"><strong>Fee Tier:</strong> Tier 1</div>
+    </div>
+    <div class="right-panel">
+        <h2>Output</h2>
+        <div class="value-block"><strong>Slippage (%):</strong> <span id="slippage">--</span></div>
+        <div class="value-block"><strong>Fees ($):</strong> <span id="fees">--</span></div>
+        <div class="value-block"><strong>Market Impact ($):</strong> <span id="marketImpact">--</span></div>
+        <div class="value-block"><strong>Net Cost ($):</strong> <span id="netCost">--</span></div>
+        <div class="value-block"><strong>Maker/Taker Probability:</strong> <span id="makerTaker">--</span></div>
+        <div class="value-block"><strong>Latency (ms):</strong> <span id="latency">--</span></div>
+
+    </div>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const ws = new WebSocket("ws://127.0.0.1:8000/ws/market/");
+
+    ws.onopen = () => console.log("WebSocket connected.");
+
+    ws.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        
+        console.log("WebSocket data:", data);
+
+        if (data) {
+            document.getElementById("slippage").innerText = data.slippage_pct + " %";
+            document.getElementById("fees").innerText = "$" + data.fees_usd;
+            document.getElementById("marketImpact").innerText = "$" + data.market_impact_usd;
+            document.getElementById("netCost").innerText = "$" + data.net_cost_usd;
+            document.getElementById("makerTaker").innerText = (data.maker_taker_prob * 100).toFixed(2) + "%";
+            document.getElementById("latency").innerText = data.latency_ms + " ms";
+        }
+        // } else {
+        //     document.getElementById("slippage").innerText = data.slippage_pct + " %";
+        //     document.getElementById("fees").innerText = "$" + data.fees_usd;
+        //     document.getElementById("marketImpact").innerText = "$" + data.market_impact_usd;
+        //     document.getElementById("netCost").innerText = "$" + data.net_cost_usd;
+        //     document.getElementById("makerTaker").innerText = (data.maker_taker_prob * 100).toFixed(2) + "%";
+        //     document.getElementById("latency").innerText = data.latency_ms + " ms";
+        // }
+    };
+
+    ws.onerror = (e) => console.error("WebSocket error:", e);
+    ws.onclose = () => console.log("WebSocket closed.");
+});
+</script>
+
+
+</body>
+</html>
