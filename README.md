@@ -39,13 +39,10 @@ The **Django Trade Simulator** is a real-time, high-performance trading simulato
 
 > Add these images in the `/screenshots` folder of your repo.
 
-| Dashboard Panel | 
-|------------------| ------------------|
-| (https://github.com/user-attachments/assets/71dd9c6d-9c42-4997-abdd-d5df60d1db02)
- |(https://github.com/user-attachments/assets/96840242-b039-4195-a6e5-11876576e318)
-)
- |(https://github.com/user-attachments/assets/42bbcb56-9d6d-4720-95d7-3117f5fc6604)
- |
+![Screen-Shot-2022-11-22-at-8 19 34-AM](https://github.com/user-attachments/assets/451d36c8-02ce-4404-b1e1-d048f894d986)
+![top-Practice-Trading-Simulators-tradenation-768x453](https://github.com/user-attachments/assets/88155e18-1bd9-440d-9854-29216c6e4a5e)
+![Screen-Shot-2022-11-22-at-8 19 02-AM](https://github.com/user-attachments/assets/d13317ce-ff6d-4933-a119-ed7718970b94)
+
 
 ---
 
